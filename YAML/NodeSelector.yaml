@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dep1
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: ng
+  template:
+    metadata:
+      labels:
+        app: ng
+    spec:
+      containers:
+        - name: dep-pod
+          image: nginx
+          ports:
+            - containerPort: 80
+      nodeSelector:
+        env: test
