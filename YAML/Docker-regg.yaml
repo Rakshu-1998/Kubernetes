@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-new
+spec:
+  replicas: 4
+  selector:  
+    matchLabels:
+      app: ngx
+  template:
+    metadata:
+      labels:
+        app: ngx
+    spec:
+      containers:
+        - name: my-con
+          image: rakshithahm/custom_image
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+      imagePullSecrets:
+        - name: my-hub
