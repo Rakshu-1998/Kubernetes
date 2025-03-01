@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: my-config2
+data:
+  env: test
+  db_url: 172.53.62.112
