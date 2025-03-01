@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: my-dep
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: ngx
+  template:
+    metadata:
+      labels:
+        app: ngx
+    spec:
+      containers:
+        - name: my-pod
+          image: nginx
+          ports:
+            - containerPort: 80
+          env:
+          - name: ENV 
+            valueFrom:
+              configMapKeyRef: 
+                name: my-config
+                key: env
+          - name: EVR
+            valueFrom:
+              configMapKeyRef: 
+                name: my-config2
+                key: env
