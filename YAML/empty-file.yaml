@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pd
+spec:
+  containers:
+    - name: my-app
+      image: nginx
+      ports:
+        - containerPort: 80
+      volumeMounts:
+        - name: empt-vol
+          mountPath: /var/log/nginx
+    - name: sidecar
+      image: busybox
+      command: ["sh", "-c", "sleep infinity"]
+      volumeMounts:
+        - name: empt-vol
+          mountPath: /var/log/nginx
+  volumes:
+    - name: empt-vol
+      emptyDir: {}
+
