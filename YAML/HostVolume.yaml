@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-dep-host
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: new
+  template:
+    metadata:
+      labels:
+        app: new
+    spec:
+      containers:
+        - name: my-pod
+          image: nginx
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: my-vol
+              mountPath: "/app/my-vol"
+      volumes:
+        - name: my-vol
+          hostPath:
+            path: "/home/ubuntu/my-vol"
+            type: DirectoryOrCreate
